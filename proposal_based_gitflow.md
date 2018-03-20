@@ -1,7 +1,7 @@
 # Proposal for Ideal Mobile Development Workflow Based on GitFlow
 **We need to have workflow that make stable builds, on development, maintenance, and when production issue occurs.**
 
-**Goals:** 
+**Goals:**
 - **Make a stable production ready build every sprints**
 - **Production ready deployment for hotfixes**
 
@@ -9,14 +9,14 @@ Stable does not mean bug free.
 Stable means worry less, no critical or high priority bugs, no obvious bugs.
 
 ## Development Phase is based on Scrum
-2 weeks sprints
-1 week or less **stabilization phase**
-2 days PVT + Security Testing (need subject matters on this)
+- 2 weeks sprints
+- 1 week or less **stabilization phase**
+- 2 days PVT + Security Testing (need subject matters on this)
 
 ## Maintenance Mode is based on Kanban.
 This is for handling non-critical bug fixes, non high impact stories.
-1 week or according to team’s agreement 
-2 days PVT + Security (need subject matters on this)
+- 1 week or according to team’s agreement
+- 2 days PVT + Security (need subject matters on this)
 
 ## Production Issue
 This phase is for business impacting issues, that needs to be done immediately, by adding patches.
@@ -42,26 +42,31 @@ According to SLA if any, or ASAP.
 Development mode is whenever we build a new features with full sprint cycles on it.
 
 **feature/***
+
 **bug/***
+
 Developer create this branch on their local machine, will be merged and pushed to develop branch after code review is approved.
 This branch should be removed from git after it is merged to develop
 
 **develop**
+
 Main branch for all developers’ work, this is still not stable, not yet checked by QA. All commits merged to this branch is tested by developers to be **working, not breaking, linted, passed unit tests, and code reviewed** by lead developer.
-Additionally, developer can add a flag to features merged on this branch, when the features are not gonna be released yet, because of let’s say, a business need. 
+Additionally, developer can add a flag to features merged on this branch, when the features are not gonna be released yet, because of let’s say, a business need.
 Develop branch should only visible to developers only. No builds from this branch goes to outside world.
 
 **release**
-This branch is for preparation to release a feature. Whenever the team decides to have a release, developer lead merges develop branch on a specific commit hash to release branch. 
+
+This branch is for preparation to release a feature. Whenever the team decides to have a release, developer lead merges develop branch on a specific commit hash to release branch.
 Then all bug fixes and stabilization is merged to this branch.
 The build is automatically done **daily**, whenever it has changes.
-QA get build from this branch only. 
+QA get build from this branch only.
 The QA process is done in stabilization phase.
 After the build is declared **stable**, then developer lead merge this to master and develop branch.
 
 **master**
+
 This branch contains stable build. It is tagged by version and build number. The tag functions should make developers easy to pinpoint which commit to build in case there’s a rollback.
-PVT + Security 
+PVT + Security
 
 ### Maintenance Mode
 This is for handling non-critical bug fixes, non high impact stories.
@@ -69,15 +74,19 @@ If there are any big features or improvement, then it’s better to use developm
 **Bug branch** will be merged to **release branch**, then to master and develop
 
 **bug/***
+
 the same as above, the difference is only it is for bug fixing.
 
 **release**
+
 the same as above
 
 **develop**
+
 the same as above.
 
 **master**
+
 the same as above.
 
 ### Hotfix Mode
@@ -85,16 +94,19 @@ Hotfix mode is for whenever there is production issue that needs to be fixed as 
 Pushing changes to `hotfix/*` branch will automatically make builds for **UAT** and **Production** environment.
 
 **hotfix/***
+
 Hotfix branch is for fixing the bug happened in production, this is branched directly from master on specific tag.
-After linting, unit testing, and code reviewing is done. 
+After linting, unit testing, and code reviewing is done.
 Hotfix is merged to master branch.
 This branch, whenever pushed, should automatically run lint, unit tests, and creating build.
 Then it should be reviewed by lead developer before it’s merged to master and develop
 
 **develop**
+
 the same as above
 
 **master**
+
 the same as above
 
 ## Roles
@@ -142,7 +154,7 @@ If the full Automated UI Test is stable, then the Development mode and Maintenan
 1. CircleCI for CI runner
 2. Fastlane for builder
 3. HockeyApp, for adhoc or internal distribution
-4. Artifactory for collecting IPAs or APKs 
+4. Artifactory for collecting IPAs or APKs
 5. Bugsnag for error reporting
 6. Slack for team notifications
 7. Bitbucket or GitHub for Source Control
@@ -152,4 +164,3 @@ If the full Automated UI Test is stable, then the Development mode and Maintenan
 
 ## Contributions
 mamaz @mamaz
-
