@@ -295,7 +295,8 @@ desc "Make adhoc build, for SIT, UAT, PROD using AdHoc profile"
 ```
 
 ## Contributions
-mamaz @mamaz
+- [mamaz](https://github.com/mamaz)
+- [gregory](https://github.com/gsukanto)
 
 ## Further Development
 - If the automated UI test is working, then the **true** Continuous Delivery will be real. Developer will only branch from master and merge back to it, it should automatically create a production ready build.
