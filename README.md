@@ -88,18 +88,20 @@ Then it should be reviewed by lead developer before it’s merged to master and 
 Have the same **develop** and **master** as the Development Mode.
 
 ## Rules
-* **We create builds for consumers (QA , Internal Users, or Penetration Testers), when we want to release.**
+* **We create builds for internal consumers (QA , Internal Users, or Penetration Testers), when we want to release.**
+* **Customers get production stable release only.**
 * **QA tests** on **release branch** on **stabilization phase**.
 * Developers should make sure their work is done according to stories and already test them before doing code review.
 * “Real” Unit Tested :)
 * Approver **MUST** checkout branch on PR and **see by their own eyes, that things is proper** before clicking the approve button.
-* No builds comes from develop branch for other consumers, develop build is only for developer. CI will not create build for develop branch. Developers should be able to make builds locally.
-* Make builds from release branch (stabilization) daily.
-* Only hot fix branch can directly make builds.
+* **No builds** comes from **develop branch** for **internal consumers**, develop build is only for developer. 
+* CI will not create build for develop branch. Developers should be able to make builds locally.
+* Make builds from release branch daily on stabilization phase.
+* **Only hotfix branch can directly make builds**.
 * Release branch is a branching from develop, release branch contains commits that wants to be stabilized and released, a release candidate.
 * On release branch, several release candidate can be tagged. Ex: v.1.0.1-RC1.
 * Once QA team declares the build is stable, release is merged to master and tagged, it is also merged back to develop.
-* Tagging format is like this: v.1.15.0-7001 (v.<version><buildNumber>).
+* Tagging format is like this: **v.1.15.0-7001 (v.<version><buildNumber>)**.
 
 ## Roles
 ### Developer
@@ -294,6 +296,9 @@ desc "Make adhoc build, for SIT, UAT, PROD using AdHoc profile"
 
 ## Contributions
 mamaz @mamaz
+
+## Further Development
+If the automated UI test is working, then the **true** Continuous Delivery will be real. Developer will only branching from master and merge back to it, it will automatically deployed.
 
 ## License
 MIT License
