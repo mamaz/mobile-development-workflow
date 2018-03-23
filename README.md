@@ -99,9 +99,9 @@ Have the same **develop** and **master** as the Development Mode.
 * Make builds from release branch daily on stabilization phase.
 * **Only hotfix branch can directly make builds**.
 * Release branch is a branching from develop, release branch contains commits that wants to be stabilized and released, a release candidate.
-* On release branch, several release candidate can be tagged. Ex: v.1.0.1-RC1.
+* On release branch, several release candidate can be tagged. Ex: v.1.0.1-7004.
 * Once QA team declares the build is stable, release is merged to master and tagged, it is also merged back to develop.
-* Tagging format is like this: **v.1.15.0-7001 (v.<version><buildNumber>)**.
+* Tagging format is like this: **v.1.15.0-7001 (v.< version >< buildNumber >)**.
 
 ## Roles
 ### Developer
