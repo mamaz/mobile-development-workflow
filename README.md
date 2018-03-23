@@ -1,7 +1,7 @@
 # Proposal for Ideal Mobile Development Workflow Based on GitFlow
 **We need to have workflow that make stable builds, on development, maintenance, and when production issue occurs.**
 
-**Goals:**
+**Goals:** 
 - **Make a stable production ready build every sprints**
 - **High and critical bugs are known as early as possible**
 - **Make hotfixes / patches to be production ready fast**
@@ -22,25 +22,12 @@ Development phase is a phase for building new features or starting new product f
 ## Maintenance Mode
 This is for handling non-critical bug fixes and stabilization of an existing application.
 - Based on Kanban
-- 1 week or according to team’s agreement
+- 1 week or according to team’s agreement 
 - 2 days PVT + Security (need subject matters on this)
 
 ## Production Issue
 This phase is for business impacting issues, that needs to be done immediately, by adding patches.
 The timeline is according to SLA if any, or ASAP.
-
-## Rules
-* **We create builds for consumers (QA , Internal Users, or Penetration Testers), when we want to release.**
-* **QA tests** on **release branch** on **stabilization phase**.
-* Developers should make sure their work is done according to stories and already test them before doing code review.
-* Approver **MUST** checkout branch on PR and **see by their own eyes, that things is proper** before clicking the approve button.
-* No builds comes from develop branch for other consumers, develop build is only for developer. CI will not create build for develop branch. Developers should be able to make builds locally.
-* Make builds from release branch (stabilization) daily.
-* Only hot fix branch can directly make builds.
-* Release branch is a branching from develop, release branch contains commits that wants to be stabilized and released, a release candidate.
-* On release branch, several release candidate can be tagged. Ex: v.1.0.1-RC1.
-* Once QA team declares the build is stable, release is merged to master and tagged, it is also merged back to develop.
-* Tagging format is like this: v.1.15.0-7001 (v.<version><buildNumber>).
 
 ## Detailed Guidelines
 ![](README/Screen%20Shot%202018-03-20%20at%208.36.05%20PM.png)
@@ -61,22 +48,22 @@ This branch should be removed from git after it is merged to develop
 **develop**
 
 Main branch for all developers’ work, this is still not stable, not yet checked by QA. All commits merged to this branch is tested by developers to be **working, not breaking, linted, passed unit tests, and code reviewed** by lead developer.
-Additionally, developer can add a flag to features merged on this branch, when the features are not gonna be released yet, because of let’s say, a business need.
+Additionally, developer can add a flag to features merged on this branch, when the features are not gonna be released yet, because of let’s say, a business need. 
 Develop branch should only visible to developers only. No builds from this branch goes to outside world.
 
 **release**
 
-This branch is for preparation to release a feature. Whenever the team decides to have a release, developer lead merges develop branch on a specific commit hash to release branch.
+This branch is for preparation to release a feature. Whenever the team decides to have a release, developer lead merges develop branch on a specific commit hash to release branch. 
 Then all bug fixes and stabilization is merged to this branch.
 The build is automatically done **daily**, whenever it has changes.
-QA get build from this branch only.
+QA get build from this branch only. 
 The QA process is done in stabilization phase.
 After the build is declared **stable**, then developer lead merge this to master and develop branch.
 
 **master**
 
 This branch contains stable build. It is tagged by version and build number. The tag functions should make developers easy to pinpoint which commit to build in case there’s a rollback.
-PVT + Security
+PVT + Security 
 
 ### Maintenance Mode
 This is for handling non-critical bug fixes and stabilization of an existing application. If there are big features or improvements, then it’s better to use development mode.
@@ -93,12 +80,26 @@ Pushing changes to **hotfix/*** branch will automatically make builds for **UAT*
 
 **hotfix/**
 
-Hotfix branch is for fixing the bug happened in production, this is branched directly from master on specific tag. After linting, unit testing, and code reviewing is done. Hotfix is merged to master branch.
+Hotfix branch is for fixing the bug happened in production, this is branched directly from master on specific tag. After linting, unit testing, and code reviewing is done. Hotfix is merged to master branch. 
 
 This branch, whenever pushed, should automatically run lint, unit tests, and creating build.
 Then it should be reviewed by lead developer before it’s merged to master and develop
 
 Have the same **develop** and **master** as the Development Mode.
+
+## Rules
+* **We create builds for consumers (QA , Internal Users, or Penetration Testers), when we want to release.**
+* **QA tests** on **release branch** on **stabilization phase**.
+* Developers should make sure their work is done according to stories and already test them before doing code review.
+* “Real” Unit Tested :)
+* Approver **MUST** checkout branch on PR and **see by their own eyes, that things is proper** before clicking the approve button.
+* No builds comes from develop branch for other consumers, develop build is only for developer. CI will not create build for develop branch. Developers should be able to make builds locally.
+* Make builds from release branch (stabilization) daily.
+* Only hot fix branch can directly make builds.
+* Release branch is a branching from develop, release branch contains commits that wants to be stabilized and released, a release candidate.
+* On release branch, several release candidate can be tagged. Ex: v.1.0.1-RC1.
+* Once QA team declares the build is stable, release is merged to master and tagged, it is also merged back to develop.
+* Tagging format is like this: v.1.15.0-7001 (v.<version><buildNumber>).
 
 ## Roles
 ### Developer
@@ -130,7 +131,7 @@ Have the same **develop** and **master** as the Development Mode.
 ## Pros and Cons/Challenges
 ### Pros:
 - Stabilized each releases
-- Clear visibility of code and rollbacks
+- Clear visibility of codes and rollbacks if needed
 - Clear phase between development and testing
 - Clear guidelines
 
@@ -145,7 +146,7 @@ If the full Automated UI Test is stable, then the Development mode and Maintenan
 1. CircleCI for CI runner
 2. Fastlane for builder
 3. HockeyApp, for adhoc or internal distributions
-4. Artifactory for collecting IPAs or APKs
+4. Artifactory for collecting IPAs or APKs 
 5. Bugsnag for error reporting
 6. Slack for team notifications
 7. Bitbucket or GitHub for Source Control
@@ -164,7 +165,7 @@ We start the CI/CD pipeline by checking out the code a.k.a pull the code.
 
 ### Build Creation
 
-In this step, we start installing dependencies to creating the build. This step consists of Install Runner Dependencies and Creating Builds (IPA or APK).
+In this step, we start installing dependencies to creating the build. This step consists of Install Runner Dependencies and Creating Builds (IPA or APK). 
 
 ### Build Distribution
 
@@ -195,7 +196,7 @@ QA process happens in this step. QA can test their builds after receiving notifi
 ### Delivery Implementation
 ![](README/Screen%20Shot%202018-03-22%20at%201.18.35%20PM.png)
 
-Since we use CircleCI, it is configured in `config.yml` file in `.circleci` folder on your iOS or Android project. **Checkout** and **Install Runner Dependencies** are written as a **run** step on `config.yml` while the implementation details of **Build Creation** and **Build Distribution** steps is written in `Fastfile` .
+Since we use CircleCI, it is configured in `config.yml` file in `.circleci` folder on your iOS or Android project. **Checkout** and **Install Runner Dependencies** are written as a **run** step on `config.yml` while the implementation details of **Build Creation** and **Build Distribution** steps is written in `Fastfile` . 
 
 In other words:
 
@@ -274,7 +275,7 @@ desc "Make adhoc build, for SIT, UAT, PROD using AdHoc profile"
       output_name: ipa_name,
       xcargs: "PROVISIONING_PROFILE_SPECIFIER='#{ENV["PROV_PROFILE_NAME"]}'"
     )
-
+	
 	  Dir.chdir("../..") do
       # upload sourcemaps to Bugsnag
       Helper.backticks("./bundle_sourcemaps_ios_release.sh")
@@ -285,7 +286,7 @@ desc "Make adhoc build, for SIT, UAT, PROD using AdHoc profile"
       ipa: "#{ENV["BUILD_DIRECTORY"]}/#{ipa_name}.ipa",
       notes: "Some notes",
       notify: "2", # notify all testers
-      status: "2",
+      status: "2", 
       notes_type: "0"
     )
   end
