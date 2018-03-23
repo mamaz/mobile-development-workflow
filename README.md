@@ -173,9 +173,9 @@ In this step, we start installing dependencies to creating the build. This step 
 
 We distribute the build to QA and Internal Users and also post the symbolication file to error tracking service, we use Bugsnag for this. Build distribution consists of:
 
-	- Uploading Symbolication to Bugsnag
-	- Distributing Builds: SIT, UAT, Production AdHoc (for Internal Users) to HockeyApp and Production AppStore / PlayStore to Artifactory
-	- Sending Notifications
+- Uploading Symbolication to Bugsnag
+- Distributing Builds: SIT, UAT, Production AdHoc (for Internal Users) to HockeyApp and Production AppStore / PlayStore to Artifactory
+- Sending Notifications
 
 ### Build Testing
 
